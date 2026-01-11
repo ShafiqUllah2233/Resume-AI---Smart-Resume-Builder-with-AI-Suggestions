@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// In development, use full URL; in production, use relative path
-const API_URL = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:5000/api'
-  : '/api';
+// Use environment variable for API URL, fallback to relative path for same-origin deployment
+const API_URL = process.env.REACT_APP_API_URL || '/api';
 
 // Create axios instance
 const api = axios.create({
@@ -11,7 +9,6 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
 });
 
 // Request interceptor to add auth token
